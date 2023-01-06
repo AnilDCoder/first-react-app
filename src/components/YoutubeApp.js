@@ -23,8 +23,12 @@ import History from "@mui/icons-material/History";
 import Subscriptions from "@mui/icons-material/Subscriptions";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import AddHome from "../pages/AddHome";
+import LikedVideos from "../pages/LikedVideosPage";
+import HistoryPage from "../pages/HistoryPage";
+import SubscriptionsPage from "../pages/SubscriptionsPage";
+import LikedVideosPage from "../pages/LikedVideosPage";
 
 
 
@@ -138,6 +142,7 @@ const Drawer = styled(MuiDrawer, {
 const YoutubeApp = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate();
 
   const menuList = [
     {
@@ -175,6 +180,7 @@ const YoutubeApp = () => {
 
   const handlePath =(path) =>{
     console.log(path);
+    navigate(path);
   };
 
   return (
@@ -257,7 +263,7 @@ const YoutubeApp = () => {
                   borderRadius: 2,
                 }}
                 dense
-                // onClick={()=>handlePath(item.path)}
+                onClick={()=>handlePath(item.path)}
               >
                 <ListItemIcon
                   sx={{
@@ -280,8 +286,11 @@ const YoutubeApp = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Routes>
-          <Route path="/" element={<YoutubeApp />} />
           <Route path="/home" element={<AddHome />} />
+          <Route path="/subscriptions" element={<SubscriptionsPage />} />
+          <Route path="/history" element={<HistoryPage />} />
+          <Route path="/liked" element={<LikedVideosPage />} />
+          
         </Routes>
       </Box>
     </Box>
